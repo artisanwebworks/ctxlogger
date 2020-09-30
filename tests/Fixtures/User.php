@@ -1,13 +1,13 @@
 <?php
 
-namespace ArtisanWebworks\AutoCRUD\Test\Fixtures;
+namespace ArtisanWebworks\ContextLogger\Test\Fixtures;
 
-use ArtisanWebworks\AutoCRUD\ValidatingModel;
-use ArtisanWebworks\AutoCRUD\Test\Fixtures\FooModel;
+use ArtisanWebworks\ContextLogger\Test\Fixtures\FooModel;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class User extends ValidatingModel {
+class User extends Model {
 
   protected $fillable = [
     'username',

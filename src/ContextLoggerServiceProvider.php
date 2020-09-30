@@ -6,7 +6,7 @@ namespace ArtisanWebworks\ContextLogger;
 
 use Illuminate\Support\ServiceProvider;
 
-class AutoCRUDServiceProvider extends ServiceProvider {
+class ContextLoggerServiceProvider extends ServiceProvider {
 
   public function register() {
     $this->mergeConfigFrom(

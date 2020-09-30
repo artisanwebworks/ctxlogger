@@ -1,10 +1,10 @@
 <?php
 
-use App\Logging\LogContext;
-use App\Logging\ILogContextData;
+//namespace ArtisanWebworks\ContextLogger;
+
 use function Sentry\captureException;
 use function Sentry\captureMessage;
-
+use ArtisanWebworks\ContextLogger\LogContext;
 
 // ---------- SENTRY ---------- //
 

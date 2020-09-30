@@ -1,10 +1,10 @@
 <?php
 
 
-namespace ArtisanWebworks\AutoCRUD\Test\Fixtures;
+namespace ArtisanWebworks\ContextLogger\Test\Fixtures;
 
-use ArtisanWebworks\AutoCRUD\ValidatingModel;
+use Illuminate\Database\Eloquent\Model;
 
-class BazModel extends ValidatingModel {
+class BazModel extends Model {
   protected $fillable = ['can-recognize', 'bar_model_id'];
 }

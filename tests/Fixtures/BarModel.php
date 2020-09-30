@@ -1,12 +1,12 @@
 <?php
 
 
-namespace ArtisanWebworks\AutoCRUD\Test\Fixtures;
+namespace ArtisanWebworks\ContextLogger\Test\Fixtures;
 
-use ArtisanWebworks\AutoCRUD\ValidatingModel;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class BarModel extends ValidatingModel {
+class BarModel extends Model {
   protected $fillable = ['level', 'foo_model_id'];
 
   public function bazModels(): HasMany {

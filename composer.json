@@ -11,13 +11,15 @@
         }
     ],
     "require": {
-        "ext-json": "*",
-        "laravel/framework": "*"
+        "laravel/framework": "*",
+        "sentry/sentry": "*",
+        "ext-json": "*"
     },
     "require-dev": {
         "orchestra/testbench": "*"
     },
     "autoload": {
+        "files": ["src/helper.php"],
         "psr-4": {
             "ArtisanWebworks\\ContextLogger\\": "src/"
         }
@@ -35,4 +37,3 @@
         }
     }
 }
-

@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Logging;
+namespace ArtisanWebworks\ContextLogger;
 
 
 interface ILogContextData {

@@ -1,9 +1,9 @@
 <?php
 
-namespace ArtisanWebworks\AutoCRUD\Test;
+namespace ArtisanWebworks\ContextLogger\Test;
 
-use ArtisanWebworks\AutoCRUD\AutoCRUDServiceProvider;
-use ArtisanWebworks\AutoCRUD\Test\Fixtures\User;
+use ArtisanWebworks\ContextLogger\ContextLoggerServiceProvider;
+use ArtisanWebworks\ContextLogger\Test\Fixtures\User;
 use Illuminate\Support\Facades\Auth;
 use Orchestra\Testbench\TestCase;
 use Illuminate\Contracts\Foundation\Application;
@@ -43,7 +43,7 @@ abstract class TestBase extends TestCase {
   }
 
   protected function getPackageProviders($app) {
-    return [AutoCRUDServiceProvider::class];
+    return [ContextLoggerServiceProvider::class];
   }
 
   protected static function mockLoggedInUser(): User {

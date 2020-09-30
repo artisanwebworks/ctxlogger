@@ -1,11 +1,11 @@
 <?php
 
-namespace ArtisanWebworks\AutoCRUD\Test\Fixtures;
+namespace ArtisanWebworks\ContextLogger\Test\Fixtures;
 
-use ArtisanWebworks\AutoCRUD\ValidatingModel;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class FooModel extends ValidatingModel {
+class FooModel extends Model {
 
   protected $fillable = ['name', 'user_id'];
   protected $casts = ['user_id' => 'int'];
@@ -19,7 +19,7 @@ class FooModel extends ValidatingModel {
   ];
 
   public function barModels(): HasMany {
-    return $this->hasMany('ArtisanWebworks\AutoCRUD\Test\Fixtures\BarModel');
+    return $this->hasMany('ArtisanWebworks\ContextLogger\Test\Fixtures\BarModel');
   }
 
 }

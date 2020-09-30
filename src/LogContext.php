@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Logging;
+namespace ArtisanWebworks\ContextLogger;
 
 use Exception;
 use Illuminate\Contracts\Container\BindingResolutionException;
+use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
-define('MAX_VALUE_LENGTH', 128);
+define('DEFAULT_DUMP_THRESHOLD', 128);
 
 /**
  * Tracks log context globally for a request; allows call site to push
@@ -19,7 +20,7 @@ define('MAX_VALUE_LENGTH', 128);
  */
 class LogContext {
 
-  private static $globalContextStack = [];
+  private static array $globalContextStack = [];
 
   /**
    * Push a new subcontext onto logging context stack, identified by
@@ -36,7 +37,7 @@ class LogContext {
    * @param mixed $contextObj - a key value array of contextual data, an Exception,
    *  or an object exposing ILogContextData.
    */
-  public static function pushSubContext($name, $contextObj) {
+  public static function pushSubContext(string $name, $contextObj) {
 
     // Convert various context object types to a key-value array
     if (!($data = static::contextObjectToArray($contextObj))) {
@@ -52,7 +53,7 @@ class LogContext {
    * Remove a subcontext that is no longer relevant
    * @param string $name subcontext name
    */
-  public static function popSubContext($name) {
+  public static function popSubContext(string $name) {
     unset(static::$globalContextStack[$name]);
   }
 
@@ -97,7 +98,7 @@ class LogContext {
    * @param Exception $e
    * @return array - of form ['msg' => ..., 'details' => string dump]
    */
-  public static function contextDataFromException($e) {
+  public static function contextDataFromException(Exception $e) {
 
     $data = ['err_msg' => $e->getMessage()];
 
@@ -106,7 +107,7 @@ class LogContext {
     $handler = null;
     try {
       $handler = app()->make(
-        \Illuminate\Contracts\Debug\ExceptionHandler::class
+        ExceptionHandler::class
       );
     } catch (BindingResolutionException $e) {
     }
@@ -173,8 +174,10 @@ class LogContext {
       $data = $contextObj->getLogContextData();
     }
 
-    else if ($contextObj instanceof Exception) {
-      $data = self::contextDataFromException($contextObj);
+    else {
+      if ($contextObj instanceof Exception) {
+        $data = self::contextDataFromException($contextObj);
+      }
     }
 
     if ($data === null) {
@@ -247,7 +250,8 @@ class LogContext {
 
       // Large values will be dumped to disk and referenced in the log
       // statement with a dump id.
-      if (strlen($formattedValue) > MAX_VALUE_LENGTH) {
+      $threshold = config('context-logger.dump-threshold', DEFAULT_DUMP_THRESHOLD);
+      if (strlen($formattedValue) > $threshold) {
         $formattedValue = static::dumpValueToFile($formattedValue);
       }
       $formattedData[($prefix ? $prefix . '_' : '') . $key] = $formattedValue;
