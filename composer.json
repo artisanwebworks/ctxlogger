@@ -1,0 +1,38 @@
+{
+    "name": "artisanwebworks/ctxlogger",
+    "type": "library",
+    "description": "Logging helper for Laravel that adds context data to log statements",
+    "keywords": ["laravel", "logging"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "David Dosanjh ",
+            "email": "daviddosanjh@gmail.com"
+        }
+    ],
+    "require": {
+        "ext-json": "*",
+        "laravel/framework": "*"
+    },
+    "require-dev": {
+        "orchestra/testbench": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "ArtisanWebworks\\ContextLogger\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ArtisanWebworks\\ContextLogger\\Test\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "ArtisanWebworks\\ContextLogger\\ContextLoggerServiceProvider"
+            ]
+        }
+    }
+}
+
